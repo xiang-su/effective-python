@@ -1,7 +1,8 @@
 from multiprocessing import Pool
-from bs4 import BeautifulSoup as bs
-import requests
 from multiprocessing.dummy import Pool as ThreadPool
+
+import requests
+from bs4 import BeautifulSoup as bs
 
 main_url = 'http://v.qq.com/movie/'
 
@@ -12,8 +13,8 @@ def get_url(main_url):
     # print(soup)
     item = soup.find(
         'div', {'class': 'mod_figures mod_figure_v mod_figure_v_175'})
-    list = item.findAll('li', {'class': 'list_item'})
-    urls = [i.strong.a.attrs['href'] for i in list]
+    itemList = item.findAll('li', {'class': 'list_item'})
+    urls = [i.strong.a.attrs['href'] for i in itemList]
     return urls
 
 
