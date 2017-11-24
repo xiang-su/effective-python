@@ -4,7 +4,7 @@ import platform
 
 from PIL import Image, ImageDraw, ImageFont
 
-
+RootDir = 'D:/old'
 # 指定要使用的字体和大小；/Library/Fonts/是macOS字体目录；Linux的字体目录是/usr/share/fonts/
 if platform.system() == 'Windows':
     my_font = ImageFont.truetype('C:\Windows\Fonts\Arial.ttf', 24)
@@ -35,10 +35,10 @@ def add_text_to_image(image, text, font=my_font):
 # 遍历jpg文件
 def find_jpg():
     jpg_list = []
-    rootdir = sys.path[0]
-    list = os.listdir(rootdir)  # 列出文件夹下所有的目录与文件
+    # rootdir = sys.path[0]
+    list = os.listdir(RootDir)  # 列出文件夹下所有的目录与文件
     for i in range(0, len(list)):
-        path = os.path.join(rootdir, list[i])
+        path = os.path.join(RootDir, list[i])
         if os.path.isfile(path) and (path.endswith('.jpg') or path.endswith('.JPG')):
             print(path)
             jpg_list.append(path)
@@ -53,8 +53,8 @@ for jpg_path in jpg_path_list:
     im_after = add_text_to_image(im_before, content)
     # im_after.show()
     r, g, b, a = im_after.split()
-    im_after = Image.merge('RGB',(r,g,b))
-    if not os.path.exists(sys.path[0] + '/new'):
-        os.mkdir(sys.path[0] +'/new')
-    im_after.save(sys.path[0] + '/new/' + os.path.basename(jpg_path))
-input('回车确认结束进程')
+    im_after = Image.merge('RGB', (r, g, b))
+    if not os.path.exists(RootDir + '/new'):
+        os.mkdir(RootDir + '/new')
+    im_after.save(RootDir + '/new/' + os.path.basename(jpg_path))
+input('转换完成，按回车结束进程')
