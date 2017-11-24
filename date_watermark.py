@@ -4,6 +4,7 @@ import platform
 
 from PIL import Image, ImageDraw, ImageFont
 
+
 # 指定要使用的字体和大小；/Library/Fonts/是macOS字体目录；Linux的字体目录是/usr/share/fonts/
 if platform.system() == 'Windows':
     my_font = ImageFont.truetype('C:\Windows\Fonts\Arial.ttf', 24)
@@ -38,19 +39,22 @@ def find_jpg():
     list = os.listdir(rootdir)  # 列出文件夹下所有的目录与文件
     for i in range(0, len(list)):
         path = os.path.join(rootdir, list[i])
-        if os.path.isfile(path) and path.endswith('.jpg'):
+        if os.path.isfile(path) and (path.endswith('.jpg') or path.endswith('.JPG')):
             print(path)
             jpg_list.append(path)
     return jpg_list
 
 
+content = input('请输入需要添加的水印(例如：2017/11/24):')
 jpg_path_list = find_jpg()
 for jpg_path in jpg_path_list:
-    im_before = Image.open("1.jpg")
+    im_before = Image.open(jpg_path)
     # im_before.show()
-    im_after = add_text_to_image(im_before, input('请输入需要添加的水印(例如：2017/11/24):'))
-    im_after.show()
+    im_after = add_text_to_image(im_before, content)
+    # im_after.show()
     r, g, b, a = im_after.split()
     im_after = Image.merge('RGB',(r,g,b))
-    im_after.save('im_after.jpg')
-
+    if not os.path.exists(sys.path[0] + '/new'):
+        os.mkdir(sys.path[0] +'/new')
+    im_after.save(sys.path[0] + '/new/' + os.path.basename(jpg_path))
+input('回车确认结束进程')
