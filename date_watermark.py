@@ -14,22 +14,21 @@ else:
 
 # image: 图片  text：要添加的文本 font：字体
 def add_text_to_image(image, text, font=my_font):
-    rgba_image = image.convert('RGBA')
-    text_overlay = Image.new('RGBA', rgba_image.size, (255, 255, 255, 0))
-    image_draw = ImageDraw.Draw(text_overlay)
+    if image.size[0] > 1000:
+        image = image.resize((1000, int(image.size[1] / (image.size[0] / 1000))), resample=1)
 
+    if image.size[1] > 1000:
+        image = image.resize((int(image.size[0] / (image.size[1] / 1000)), 1000), resample=1)
+
+    image_draw = ImageDraw.Draw(image)
     text_size_x, text_size_y = image_draw.textsize(text, font=font)
     # 设置文本文字位置
-    print(rgba_image)
-    text_xy = (rgba_image.size[0] - text_size_x - 10,
-               rgba_image.size[1] - text_size_y - 10)
+    print(image)
+    text_xy = (image.size[0] - text_size_x - image.size[0] * 0.07,
+               image.size[1] - text_size_y - image.size[1] * 0.07)
     # 设置文本颜色和透明度
-    # .text(text_xy, text, font=font, fill=(76, 234, 124, 180))
-    image_draw.text(text_xy, text, font=font, fill=(254, 67, 101))
-
-    image_with_text = Image.alpha_composite(rgba_image, text_overlay)
-
-    return image_with_text
+    image_draw.text(text_xy, text, font=font, fill=(255, 108, 27))
+    return image
 
 
 # 遍历jpg文件
@@ -49,11 +48,7 @@ content = input('请输入需要添加的水印(例如：2017/11/24):')
 jpg_path_list = find_jpg()
 for jpg_path in jpg_path_list:
     im_before = Image.open(jpg_path)
-    # im_before.show()
     im_after = add_text_to_image(im_before, content)
-    # im_after.show()
-    r, g, b, a = im_after.split()
-    im_after = Image.merge('RGB', (r, g, b))
     if not os.path.exists(RootDir + '/new'):
         os.mkdir(RootDir + '/new')
     im_after.save(RootDir + '/new/' + os.path.basename(jpg_path))
