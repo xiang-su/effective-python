@@ -42,7 +42,7 @@ def find_jpg():
             jpg_list.append(path)
     return jpg_list
 
-
+print('提示：请将需要添加水印的图片放在 D:/old 文件夹下')
 content = input('请输入需要添加的水印(例如：2017/11/24):')
 jpg_path_list = find_jpg()
 for jpg_path in jpg_path_list:
@@ -51,4 +51,4 @@ for jpg_path in jpg_path_list:
     if not os.path.exists(RootDir + '/new'):
         os.mkdir(RootDir + '/new')
     im_after.save(RootDir + '/new/' + os.path.basename(jpg_path))
-input('转换完成，按回车结束进程')
+input('\n转换完成，按回车结束进程')
