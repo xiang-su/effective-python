@@ -1,5 +1,4 @@
 import os
-import sys
 import platform
 
 from PIL import Image, ImageDraw, ImageFont
