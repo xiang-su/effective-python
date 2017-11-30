@@ -8,7 +8,7 @@
             "name": "Python",
             "type": "python",
             "request": "launch",
-            "stopOnEntry": false,
+            "stopOnEntry": true,
             "pythonPath": "${config:python.pythonPath}",
             "program": "${file}",
             "cwd": "${workspaceRoot}",
@@ -21,7 +21,111 @@
             ]
         },
         {
-            "name": "PySpark",
+            "name": "Python: Attach",
+            "type": "python",
+            "request": "attach",
+            "localRoot": "${workspaceRoot}",
+            "remoteRoot": "${workspaceRoot}",
+            "port": 3000,
+            "secret": "my_secret",
+            "host": "localhost"
+        },
+        {
+            "name": "Python: Terminal (integrated)",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": true,
+            "pythonPath": "${config:python.pythonPath}",
+            "program": "${file}",
+            "cwd": "",
+            "console": "integratedTerminal",
+            "env": {},
+            "envFile": "${workspaceRoot}/.env",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit"
+            ]
+        },
+        {
+            "name": "Python: Terminal (external)",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": true,
+            "pythonPath": "${config:python.pythonPath}",
+            "program": "${file}",
+            "cwd": "",
+            "console": "externalTerminal",
+            "env": {},
+            "envFile": "${workspaceRoot}/.env",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit"
+            ]
+        },
+        {
+            "name": "Python: Django",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": true,
+            "pythonPath": "${config:python.pythonPath}",
+            "program": "${workspaceRoot}/manage.py",
+            "cwd": "${workspaceRoot}",
+            "args": [
+                "runserver",
+                "--noreload",
+                "--nothreading"
+            ],
+            "env": {},
+            "envFile": "${workspaceRoot}/.env",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput",
+                "DjangoDebugging"
+            ]
+        },
+        {
+            "name": "Python: Flask (0.11.x or later)",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "${config:python.pythonPath}",
+            "program": "fully qualified path fo 'flask' executable. Generally located along with python interpreter",
+            "cwd": "${workspaceRoot}",
+            "env": {
+                "FLASK_APP": "${workspaceRoot}/quickstart/app.py"
+            },
+            "args": [
+                "run",
+                "--no-debugger",
+                "--no-reload"
+            ],
+            "envFile": "${workspaceRoot}/.env",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
+            "name": "Python: Flask (0.10.x or earlier)",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "${config:python.pythonPath}",
+            "program": "${workspaceRoot}/run.py",
+            "cwd": "${workspaceRoot}",
+            "args": [],
+            "env": {},
+            "envFile": "${workspaceRoot}/.env",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
+            "name": "Python: PySpark",
             "type": "python",
             "request": "launch",
             "stopOnEntry": true,
@@ -45,7 +149,7 @@
             ]
         },
         {
-            "name": "Python Module",
+            "name": "Python: Module",
             "type": "python",
             "request": "launch",
             "stopOnEntry": true,
@@ -61,101 +165,7 @@
             ]
         },
         {
-            "name": "Integrated Terminal/Console",
-            "type": "python",
-            "request": "launch",
-            "stopOnEntry": true,
-            "pythonPath": "${config:python.pythonPath}",
-            "program": "${file}",
-            "cwd": "",
-            "console": "integratedTerminal",
-            "env": {},
-            "envFile": "${workspaceRoot}/.env",
-            "debugOptions": [
-                "WaitOnAbnormalExit",
-                "WaitOnNormalExit"
-            ]
-        },
-        {
-            "name": "External Terminal/Console",
-            "type": "python",
-            "request": "launch",
-            "stopOnEntry": true,
-            "pythonPath": "${config:python.pythonPath}",
-            "program": "${file}",
-            "cwd": "",
-            "console": "externalTerminal",
-            "env": {},
-            "envFile": "${workspaceRoot}/.env",
-            "debugOptions": [
-                "WaitOnAbnormalExit",
-                "WaitOnNormalExit"
-            ]
-        },
-        {
-            "name": "Django",
-            "type": "python",
-            "request": "launch",
-            "stopOnEntry": true,
-            "pythonPath": "${config:python.pythonPath}",
-            "program": "${workspaceRoot}/manage.py",
-            "cwd": "${workspaceRoot}",
-            "args": [
-                "runserver",
-                "--noreload",
-                "--nothreading"
-            ],
-            "env": {},
-            "envFile": "${workspaceRoot}/.env",
-            "debugOptions": [
-                "WaitOnAbnormalExit",
-                "WaitOnNormalExit",
-                "RedirectOutput",
-                "DjangoDebugging"
-            ]
-        },
-        {
-            "name": "Flask",
-            "type": "python",
-            "request": "launch",
-            "stopOnEntry": false,
-            "pythonPath": "${config:python.pythonPath}",
-            "program": "fully qualified path fo 'flask' executable. Generally located along with python interpreter",
-            "cwd": "${workspaceRoot}",
-            "env": {
-                "FLASK_APP": "${workspaceRoot}/quickstart/app.py"
-            },
-            "args": [
-                "run",
-                "--no-debugger",
-                "--no-reload"
-            ],
-            "envFile": "${workspaceRoot}/.env",
-            "debugOptions": [
-                "WaitOnAbnormalExit",
-                "WaitOnNormalExit",
-                "RedirectOutput"
-            ]
-        },
-        {
-            "name": "Flask (old)",
-            "type": "python",
-            "request": "launch",
-            "stopOnEntry": false,
-            "pythonPath": "${config:python.pythonPath}",
-            "program": "${workspaceRoot}/run.py",
-            "cwd": "${workspaceRoot}",
-            "args": [],
-            "env": {},
-            "envFile": "${workspaceRoot}/.env",
-            "debugOptions": [
-                "WaitOnAbnormalExit",
-                "WaitOnNormalExit",
-                "RedirectOutput"
-            ]
-        },
-        {
-            "name": "Pyramid",
+            "name": "Python: Pyramid",
             "type": "python",
             "request": "launch",
             "stopOnEntry": true,
@@ -174,7 +184,7 @@
             ]
         },
         {
-            "name": "Watson",
+            "name": "Python: Watson",
             "type": "python",
             "request": "launch",
             "stopOnEntry": true,
@@ -193,16 +203,6 @@
                 "WaitOnNormalExit",
                 "RedirectOutput"
             ]
-        },
-        {
-            "name": "Attach (Remote Debug)",
-            "type": "python",
-            "request": "attach",
-            "localRoot": "${workspaceRoot}",
-            "remoteRoot": "${workspaceRoot}",
-            "port": 3000,
-            "secret": "my_secret",
-            "host": "localhost"
         }
     ]
 }
